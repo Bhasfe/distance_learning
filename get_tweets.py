@@ -20,6 +20,18 @@ hashtags = ["#distancelearning", \
             "#elearning",        \
             "#onlinelearning"]
 
+# Create a search list
+search_list = ["distance learning",  \
+               "online teaching",    \
+               "online education,",  \
+               "online course",      \
+               "online semester"     \
+               "distance course",    \
+               "distance education", \
+               "online class",       \
+               "e-learning",         \
+               "e learning"]
+
 
 # Get the necessary API information from a text file
 with open('../twitter_api.txt') as file:
@@ -30,12 +42,14 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_key_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
-def get_tweets(hashtag):
+# Define a function to get tweets
+def get_tweets(search, isHashtag):
+    
     # Create a pandas DataFrame
     df_temp = pd.DataFrame(columns=["Content", "Location", "Username", "Retweet-Count", "Favorites", "Created at"])
     
     # Get the tweets
-    tweets = tweepy.Cursor(api.search, q=hashtag+" -filter:retweets", lang="en",since="2020-02-01", tweet_mode='extended').items(15000)
+    tweets = tweepy.Cursor(api.search, q= search+" -filter:retweets", lang="en",since="2020-02-01", tweet_mode='extended').items(15000)
     
     # Iterate over tweets
     for tweet in tweets:
@@ -54,8 +68,19 @@ def get_tweets(hashtag):
         
     # Generate unique filename
     path = os.getcwd()
-    filename = path + '/output/' + hashtag[1:] + '.csv'
+    
+    # Generate a filename for hashtags or specific word
+    if isHashtag:
+        filename = path + '/output/' + search[1:] + '_hashtag.csv'
+    else:
+        filename = path + '/output/' + search.replace(" ", "") + '_wordsearch.csv'
     # Save the csv file
     df_temp.to_csv(filename)
-        
-get_tweets(hashtags[9])
+
+
+# Call get_tweets function for each hashtag and search word
+for hashtag in hashtags:
+    get_tweets(hashtag, isHashtag=True)
+
+for search in search_list:
+    get_tweets(search, isHashtag=False)
