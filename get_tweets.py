@@ -25,7 +25,7 @@ search_list = ["distance learning",  \
                "online teaching",    \
                "online education,",  \
                "online course",      \
-               "online semester"     \
+               "online semester",    \
                "distance course",    \
                "distance education", \
                "online class",       \
@@ -49,7 +49,7 @@ def get_tweets(search, isHashtag):
     df_temp = pd.DataFrame(columns=["Content", "Location", "Username", "Retweet-Count", "Favorites", "Created at"])
     
     # Get the tweets
-    tweets = tweepy.Cursor(api.search, q= search+" -filter:retweets", lang="en",since="2020-02-01", tweet_mode='extended').items(15000)
+    tweets = tweepy.Cursor(api.search, q= search+" -filter:retweets", lang="en",since="2020-08-06", tweet_mode='extended').items(15000)
     
     # Iterate over tweets
     for tweet in tweets:
@@ -79,6 +79,7 @@ def get_tweets(search, isHashtag):
 
 
 # Call get_tweets function for each hashtag and search word
+
 for hashtag in hashtags:
     get_tweets(hashtag, isHashtag=True)
 
