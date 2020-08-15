@@ -6,7 +6,7 @@ The Covid19 Pandemic brought about distance learning in the 2020 academic term. 
 
 I have collected **202.645** tweets related to distance learning by using Twitter API.
 
-*You can find the related story on [Medium](http://medium.com/@barishasdemir)*
+*You can find the related story on [Medium](https://medium.com/@barishasdemir/sentiment-analysis-on-the-tweets-about-distance-learning-with-textblob-cc73702b48bc)*
 
 ## Content
   **1. Data Gathering**  <br><br>
