@@ -1,4 +1,4 @@
-# Sentiment analysis of the tweets about distance learning with TextBlob
+# Sentiment analysis on the tweets about distance learning with TextBlob
 
 ## Introduction
 
